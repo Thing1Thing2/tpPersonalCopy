@@ -398,6 +398,7 @@ We chose to implement the changing of view panels through `CommandResult` due to
 
 - Ultimately, we believe that we will not have too many views (likely a maximum of 6 as we only have to consider `Client`, `Meeting`, `Product` and their detailed variant). As such, we felt that passing the `CommandSpecific` is a cheaper (in terms of effort and programming hours and research) and better solution for now.
 
+
 ### 3.5 Proposed Features
 
 #### 3.5.1 Multiple possible prefixes per command
@@ -623,6 +624,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`
 
 #### Quick Reference
 
+
 - [Command Line Interface](#command-line-interface)
 - [Mainstream OS](#mainstream-os)
 - [Meeting](#meeting)
@@ -646,6 +648,7 @@ Windows, MacOS, Unix.
 
 An event scheduled between the user and a client at a specific date and time.
 
+
 #### *P*
 
 ###### Product
@@ -663,6 +666,7 @@ Time periods that overlap. e.g., a time period spanning from 1400 to 1500 and an
 ###### View Panel
 
 The main and largest component of the user interface the user will be interacting with. e.g., the view panel is the component that is used to display the list of clients, show detailed information about a meeting, etc.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
