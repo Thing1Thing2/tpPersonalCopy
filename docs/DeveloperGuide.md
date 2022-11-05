@@ -169,7 +169,7 @@ Usage Scenario of `editClient`:
 
 Below is a sequence diagram that illustrates the execution of `editClient i/1` command and the interaction with `Model`.
 
-<TBA>
+tba
 
 ### 3.2 `Meeting`-related features
 
