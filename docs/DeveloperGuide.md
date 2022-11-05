@@ -367,11 +367,11 @@ From then on, the `AddClientCommand` can be built as expected.
 - **Alternative Solution 1 (current Choice):** `Prefix::getPrefix` returns a `Pattern` that `findPrefixPosition()` can match against using `Matcher` class (see diagram below).
 - Pros: `Matcher` has several useful methods for validating a match.
 - Case-insensitive matches can be made easily by setting a flag in the `Pattern`.
-- Cons: Regex string used to define a pattern may be difficult to read.
-  e.g. `String regexForBirthday = "[b|d|birthday|birthdate][\\\\]"` is not as clear as Alternative 2
+- Cons: Regex string used to define a pattern may be difficult to read. 
+  - e.g. `String regexForBirthday = "[b|d|birthday|birthdate][\\\\]"` is not as clear as Alternative 2
 - **Alternative Solution 2:** Store each possible prefix as a `String` in a `List` maintained by `Prefix`.
-- Pros: `String` matches are easier to understand than regexes
-  e.g. `String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"}` and check for matches in this array. 
+- Pros: `String` matches are easier to understand than regexes 
+  - e.g. `String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"}` and check for matches in this array. 
 - Cons: `List` of `String` returned is cumbersome for pattern matching, i.e. Iterate through every `String` in `patternsForBirthday` to look for a match.
 - **Solution 1** is chosen because: 
   - A single `Pattern` for each `Prefix` is more succinct that a `List`.
