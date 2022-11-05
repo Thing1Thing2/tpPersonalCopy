@@ -378,6 +378,7 @@ From then on, the `AddClientCommand` can be built as expected.
   - No need to iterate through a list of `Strings` to find a match.
   - Matches can be made using pre-existing methods in `Matcher` class (no need to rely on `String` methods)
 <!-- problematic, rmb to update the header hashs after complete -->
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Documentation, logging, testing, configuration, dev-ops
