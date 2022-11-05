@@ -155,7 +155,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 3.1 `Client`-related features
 
-### 3.1.1 Edit Client feature
+#### 3.1.1 Edit Client feature
 
 Syntax: `editClient i/INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [b/BIRTHDAY] [pd/PRODUCT]`
 
