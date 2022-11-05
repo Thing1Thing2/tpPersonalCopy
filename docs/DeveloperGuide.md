@@ -167,7 +167,7 @@ Usage Scenario of `editClient`:
 
 1) User inputs `editClient i/1 a/123 Street` to edit the first client in the `Model` by adding an address.
 
-Below is a sequence diagram that illustrates the execution of `editClient i/1` command and the interaction with `Model`.
+Below is a sequence diagram that illustrates the execution of `editClient i/1 a/123 Street` command and the interaction with `Model`.
 
 tba
 
@@ -305,15 +305,15 @@ Below is a sequence diagram that illustrates the execution of `editMeeting i/1 d
 
 ##### Design Considerations
 
-**Aspect: Class that triggers model and storage update**
+**Aspect: Class that triggers `Model` and `Storage` update**
 
-- **Alternative Solution 1 (current choice):** LogicManager::execute() causes both updates
-    - Pros: Any error in updating storage or model can be identified within execute().
+- **Alternative Solution 1 (current choice):** `LogicManager#execute` causes both updates
+    - Pros: Any error in updating storage or model can be identified within `execute()`.
     - Cons: Execute command performs two functions, update model and update storage, which is not ideal for separating responsibilities.
-- **Alternative Solution 2:** LogicManager causes Model update which internally triggers Storage update
-    - Pros: Removes one instance of cohesion between Logic and Storage (Logic can access Storage via Model only).
-    - Cons: Model is a single point of failure in this scheme.
-- LogicManager is responsible for coordinating both Model and Storage updates because Model and Storage should be kept as separate entities according to the architecture. **Solution 1** is thus chosen as it maintains the design pattern chosen in the architecture.
+- **Alternative Solution 2:** `LogicManager` causes `Model` update which internally triggers `Storage` update
+    - Pros: Removes one instance of cohesion between `Logic` and `Storage` (`Logic` can access `Storage` via `Model` only).
+    - Cons: `Model` is a single point of failure in this scheme.
+- `LogicManager` is responsible for coordinating both `Model` and `Storage` updates because `Model` and `Storage` should be kept as separate entities according to the architecture. **Solution 1** is thus chosen as it maintains the design pattern chosen in the architecture.
 
 <img src="images/AlternativeEditActivityDiagram.png" width="250" />
 
@@ -349,34 +349,33 @@ However, since a birthday is essentially a date, a user may prefer to reuse the 
 
 ##### Implementation
 
-AddClientCommandParser depends on multiple Prefix objects such as PREFIX_BIRTHDAY, and PREFIX_DATE to identify each field in an AddClientCommand.
-Currently, Prefix class stores the required prefix word as a String.
-Consider changing the prefix word to a Pattern which can be matched against using Matcher.
-For all prefixes we are looking for, we first get the matching pattern using getPrefix().
-Then, findPrefixPosition()  validates the presence of a field and also obtain the index of its first occurrence.
-From then on, the AddClientCommand can be built as expected.
+`AddClientCommandParser` depends on multiple `Prefix` objects such as `PREFIX_BIRTHDAY`, and `PREFIX_DATE` to identify each field in an `AddClientCommand`.
+Currently, `Prefix` class stores the required prefix word as a `String`.
+Consider changing the prefix word to a `Pattern` which can be matched against using `Matcher` class.
+For all prefixes we are looking for, we first get the matching pattern using `getPrefix()`.
+Then, `findPrefixPosition()`  validates the presence of a field and also obtain the index of its first occurrence.
+From then on, the `AddClientCommand` can be built as expected.
 
 <img src="images/ProposedPrefixSequenceDiagram.png" width="550" />
 
 
 ##### Design Considerations
 
-Aspect: How prefixes are stored:
+**Aspect: How prefixes are stored:**
 
--Alternative Solution 1 (Current Choice): Prefix::getPrefix() returns a Pattern that findPrefixPosition() can match against using Matcher class.
-- Pros: Matcher has several useful methods for validating a match.
-- Case-insensitive matches can be made easily by setting a flag in the Pattern.
+- **Alternative Solution 1 (current Choice):** `Prefix::getPrefix` returns a `Pattern` that `findPrefixPosition()` can match against using `Matcher` class (see diagram below).
+- Pros: `Matcher` has several useful methods for validating a match.
+- Case-insensitive matches can be made easily by setting a flag in the `Pattern`.
 - Cons: Regex string used to define a pattern may be difficult to read.
-  e.g. String regexForBirthday = "[b|d|birthday|birthdate][\\\\]" is not as clear as Alternative 2
-
-- Alternative Solution 2: Store each possible prefix as a String in a List maintained by Prefix.
-- Pros: String matches are easier to understand than regexes
-  e.g. String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"}
-- Cons: List of String returned is cumbersome for pattern matching, i.e. Iterate through every String in patternsForBirthday to look for a match.
+  e.g. `String regexForBirthday = "[b|d|birthday|birthdate][\\\\]"` is not as clear as Alternative 2
+- **Alternative Solution 2:** Store each possible prefix as a `String` in a `List` maintained by `Prefix`.
+- Pros: `String` matches are easier to understand than regexes
+  e.g. `String[] patternsForBirthday = {"b", "d", "birthday", "birthdate"}` and check for matches in this array. 
+- Cons: `List` of `String` returned is cumbersome for pattern matching, i.e. Iterate through every `String` in `patternsForBirthday` to look for a match.
 - **Solution 1** is chosen because: 
-  - A single Pattern for each Prefix is more succinct that a List.
-  - No need to iterate through a list of Strings to find a match.
-  - Matches can be made using pre-existing methods in Matcher (no need to rely on String methods)
+  - A single `Pattern` for each `Prefix` is more succinct that a `List`.
+  - No need to iterate through a list of `Strings` to find a match.
+  - Matches can be made using pre-existing methods in `Matcher` class (no need to rely on `String` methods)
 <!-- problematic, rmb to update the header hashs after complete -->
 --------------------------------------------------------------------------------------------------------------------
 
