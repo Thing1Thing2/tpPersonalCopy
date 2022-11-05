@@ -169,7 +169,7 @@ Usage Scenario of `editClient`:
 
 Below is a sequence diagram that illustrates the execution of `editClient i/1 a/123 Street` command and the interaction with `Model`.
 
-tba
+![EditClientSequenceDiagram](images/EditClientSequenceDiagram.png)
 
 ### 3.2 `Meeting`-related features
 
@@ -302,6 +302,7 @@ Below is an activity diagram that summarizes how the updates are reflected in `M
 
 Below is a sequence diagram that illustrates the execution of `editMeeting i/1 d/09112023` command and the interaction with `Model`.
 
+![EditMeetingSequenceDiagram](images/EditMeetingSequenceDiagram.png)
 
 ##### Design Considerations
 
@@ -541,7 +542,7 @@ An event scheduled between the user and a client at a specific date and time.
 
 #### *T*
 
-##### Timing Conflict
+###### Timing Conflict
 
 Time periods that overlap. e.g. meetings should not be happening on the same time.
 
