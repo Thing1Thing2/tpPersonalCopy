@@ -523,13 +523,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`
 
 #### Quick Reference
 
-- [Mainstream OS](#cli)
-- [Meeting](#)
-- [Timing Conflict](#index)
-- [JSON file](#json-file)
-- [JAR file](#jar-file)
-- [Java 11](#java-11)
-- [Parameter](#parameter)
+- [Mainstream OS](#mainstream-os)
+- [Meeting](#meeting)
+- [Timing Conflict](#timing-conflict)
 
 #### *M*
 
